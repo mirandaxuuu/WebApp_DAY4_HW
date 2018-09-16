@@ -1,0 +1,73 @@
+function Word(length, content) {
+  this.wordLen = length;
+  this.wordCon = content;
+}
+
+var word1 = new Word(3, ["c", "a", "t"]);
+var word2 = new Word(3, ["d", "o", "g"]);
+var word3 = new Word(4, ["b", "e", "a", "r"]);
+var word4 = new Word(8, ["e", "l", "e", "p", "h", "a", "n", "t"]);
+
+var wordList = [word1, word2, word3, word4];
+
+function getRandomNum() {
+  return Math.floor(Math.random() * Math.floor(4));
+}
+
+randomNum = getRandomNum();
+var secretWord = wordList[randomNum];
+// console.log(secretWord);
+
+var guessed = [];
+
+for (i = 0; i < secretWord.wordLen; i++) {
+  guessed.push("_");
+}
+
+var x = false;
+var lives = 8;
+
+// console.log(guessed);
+
+function guessLetter(userInput) {
+
+  for (i = 0; i < secretWord.wordLen; i++) {
+    if (secretWord.wordCon[i] == userInput) {
+      guessed[i] = userInput;
+      console.log(guessed);
+      x = true;
+    }
+  }
+
+  if (x == true) {
+    console.log("CONGRATULATIONS! YOU HAVE FOUND A NEW LETTER!");
+    console.log("YOU HAVE " + lives + " MORE LIVES.")
+    console.log(" ");
+  } else {
+    lives = lives - 1;
+    if (lives == 0) {
+      console.log("YOU LOST...");
+      console.log(" ");
+    } else {
+      console.log("TRY AGAIN...");
+      console.log("YOU HAVE " + lives + " MORE LIVES.")
+      console.log(" ");
+    }
+  }
+
+
+  x = false;
+
+  answerString = secretWord.wordCon.toString();
+  guessedString = guessed.toString();
+
+  if (answerString == guessedString) {
+    console.log("CONGRATULATIONS! YOU HAVE WON THE GAME!");
+  }
+}
+
+guessLetter("d");
+guessLetter("b");
+guessLetter("e");
+guessLetter("a");
+guessLetter("r");
